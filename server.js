@@ -26,6 +26,10 @@ app.use("/api/cart", cartRoute);
 // Serve static files
 app.use('/image', express.static('Upload'));
 
+app.get("/", (req, res) => {
+  res.send("this is the root path!");
+});
+
 // Set view engine
 app.set('views', path.join(__dirname, 'Views'));
 app.set('view engine', 'ejs');
