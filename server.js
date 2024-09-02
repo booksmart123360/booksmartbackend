@@ -41,6 +41,7 @@ const port = process.env.PORT || 4000;
 const url = "mongodb+srv://bookmart:bookmart2024@bookmart.fntnbku.mongodb.net/bookmartDb"
 
 connectToDb(url);
-app.listen(3000, () => {
-  console.log(`Server is running at http://localhost:${port}`);
+
+app.listen(5000, () => {
+  console.log(`Server is running at http://localhost:${5000}`);
 });
