@@ -1,0 +1,766 @@
+{
+	"info": {
+		"_postman_id": "4adc50b4-2aad-4c87-adfa-c3d3f0500e86",
+		"name": "Bookmart",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33418485"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstname\": \"mayur\",\r\n    \"lastname\": \"gangawani\",\r\n     \"email\": \"mr.tinkztweety@gmail.com\",\r\n    \"address\": \"mumbai\",\r\n    \"phoneNO\": 75632223,\r\n    \"password\":\"test\",\r\n     \"pincode\":\"226464\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/user/register",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "verifytoken",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"token\":\"$2a$10$aA6kDs6ur2qol6EjAsATWeKY.sfzy9Al6EjNerkawUdukbiIgZZvW\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/user/verifytoken",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"verifytoken"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"nikhilex@gmail.com\",  \r\n    \"password\":\"user1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/user/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/user/list",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"user",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "CreateCate",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "categoryName",
+									"value": "law",
+									"type": "text"
+								},
+								{
+									"key": "categoryImage",
+									"type": "file",
+									"src": "/C:/Users/Adarsh.Dubey/OneDrive - Interpublic/Pictures/Capture.PNG"
+								},
+								{
+									"key": "categoryBannerImage",
+									"type": "file",
+									"src": [
+										"/C:/Users/Adarsh.Dubey/OneDrive - Interpublic/Downloads/Amazon.jpg",
+										"/C:/Users/Adarsh.Dubey/OneDrive - Interpublic/Downloads/logoadarsh.png",
+										"/C:/Users/Adarsh.Dubey/OneDrive - Interpublic/Downloads/Icici.jfif"
+									]
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/category/create",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"category",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateCate",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "categoryName",
+									"value": "law",
+									"type": "text"
+								},
+								{
+									"key": "categoryImage",
+									"type": "file",
+									"src": "/C:/Users/Adarsh.Dubey/OneDrive - Interpublic/Downloads/Amazon.jpg"
+								},
+								{
+									"key": "categoryBannerImage",
+									"type": "file",
+									"src": [
+										"/C:/Users/Adarsh.Dubey/OneDrive - Interpublic/Downloads/filename.png",
+										"/C:/Users/Adarsh.Dubey/OneDrive - Interpublic/Downloads/filename (1).png",
+										"/C:/Users/Adarsh.Dubey/OneDrive - Interpublic/Downloads/filename (2).png"
+									]
+								},
+								{
+									"key": "_id",
+									"value": "65e832286f56b47233b040fd",
+									"type": "text"
+								},
+								{
+									"key": "isActive",
+									"value": "true",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/category/update",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"category",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteCate",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\":\"65e832286f56b47233b040fd\",\r\n    \"isActive\":false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/category/delete",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"category",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listCate",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/category/list",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"category",
+								"list"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SubCategory",
+			"item": [
+				{
+					"name": "CreateSubCate",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"subCategoryName\":\"subCate3\",\r\n    \"categoryById\":\"65e832286f56b47233b040fd\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/subcategory/create",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"subcategory",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ListSubCate",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/subcategory/list",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"subcategory",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteSubCate",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n     \"_id\":\"65eac684ffe2124f806a42d6\",\r\n    \"isActive\":false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/subcategory/delete",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"subcategory",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ListSubCateByCateId",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/subcategory/listByCateID/65e832286f56b47233b040fd",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"subcategory",
+								"listByCateID",
+								"65e832286f56b47233b040fd"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "productName",
+									"value": "Law Book",
+									"type": "text"
+								},
+								{
+									"key": "productImage",
+									"type": "file",
+									"src": "/C:/Users/Adarsh.Dubey/OneDrive - Interpublic/Downloads/filename.png"
+								},
+								{
+									"key": "productPrice",
+									"value": "870",
+									"type": "text"
+								},
+								{
+									"key": "productDescription",
+									"value": "jhhsadkuhawd jhyhawd jkhawd kuhsad ",
+									"type": "text"
+								},
+								{
+									"key": "categoryById",
+									"value": "65e832286f56b47233b040fd",
+									"type": "text"
+								},
+								{
+									"key": "subCategoryById",
+									"value": "65eac676ffe2124f806a42d3",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/product/create",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"product",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/product/list",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"product",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "productName",
+									"value": "IT Books",
+									"type": "text"
+								},
+								{
+									"key": "productImage",
+									"type": "file",
+									"src": "/C:/Users/Adarsh.Dubey/OneDrive - Interpublic/Downloads/Amazon.jpg"
+								},
+								{
+									"key": "productPrice",
+									"value": "800",
+									"type": "text"
+								},
+								{
+									"key": "productDescription",
+									"value": "hjsad kjjjhsda kjjsda oijd ",
+									"type": "text"
+								},
+								{
+									"key": "categoryById",
+									"value": "65e832286f56b47233b040fd",
+									"type": "text"
+								},
+								{
+									"key": "subCategoryById",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "_id",
+									"value": "65ef2081e49243debf0e1ce9",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/product/update",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"product",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n     \"_id\":\"65eff3998240b6429a1d4ba5\",\r\n    \"isActive\":false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/product/delete",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"product",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ListByCateId",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/product/listByCate/65e832286f56b47233b040fd",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"product",
+								"listByCate",
+								"65e832286f56b47233b040fd"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cart",
+			"item": [
+				{
+					"name": "AddAndUpdate",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"CustomerID\":\"65e6a5a031e8b88a3cd650ff\",\r\n    \"CustomerEmail\":\"test8@gmail.com\",\r\n    \"CustomerFirstName\":\"lkjsdelkjdsa\",\r\n    \"CustomerMobileNumber\":\"787878\",   \r\n  \"Products\": [\r\n    {\r\n    \"ProductID\": \"65eff4113f3c119aa87fc2da\",\r\n    \"Image\": \"https://example.com/image.jpg\",\r\n    \"ProductName\": \"Law book\",   \r\n    \"MRP\": 423,   \r\n    \"Qty\": 2,\r\n    \"SubTotal\": 0,  \r\n    \"Amount\": 0\r\n    \r\n}\r\n]\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{proUrl}}/cart/create",
+							"host": [
+								"{{proUrl}}"
+							],
+							"path": [
+								"cart",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetList",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/cart/list",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"cart",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
