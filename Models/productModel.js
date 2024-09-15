@@ -5,12 +5,13 @@ const product = mongoose.Schema({
   productImage: { type: String },
   productPrice: { type: Number },
   productDescription: { type: String },
+  categoryName: {type:String},
   categoryById: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Category",
     require: true,
   },
-
+  subCategoryName: {type: String},
   subCategoryById: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "SubCategory",

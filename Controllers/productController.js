@@ -1,11 +1,11 @@
 const Jwt = require("jsonwebtoken");
 const { productModel } = require("../Models/productModel.js");
-const {categoryModel} = require("../Models/categoryModel.js");
-const {subcategoryModel} = require("../Models/subCategoryModel.js")
+const { categoryModel } = require("../Models/categoryModel.js");
+const { subcategoryModel } = require("../Models/subCategoryModel.js");
 const { userRegistration } = require("../Models/userModel.js");
 const excelToJson = require("convert-excel-to-json");
 const dotenv = require("dotenv");
-const { deleteUploadedFile } = require("../Confige/FileUpload.js")
+const { deleteUploadedFile } = require("../Confige/FileUpload.js");
 dotenv.config();
 
 class productController {
@@ -15,7 +15,7 @@ class productController {
       .findOne({ _id: _id })
       .select("-__v");
     if (UserData.isAdmin) {
-      const productList = await productModel.find().select("-__v");
+      const productList = await productModel.find({isActive: true}).select("-__v");
       res.status(200).send({ status: "Success", data: productList });
     } else {
       const productList = await productModel
@@ -39,21 +39,44 @@ class productController {
 
       let dataToSaveInDb = [];
 
+      let errors = [];
+
       for (let i = 0; i < productsData.length; i++) {
         const product = productsData[i];
 
-        const categoryById = await categoryModel.findOne({categoryName: product.D}).select("_id");
-        const subCategoryById = await subcategoryModel.findOne({subCategoryName: product.E}).select("_id");
+        const category = await categoryModel
+          .findOne({ categoryName: product.D });
+        const subCategory = await subcategoryModel
+          .findOne({ subCategoryName: product.E });
 
+        if (product.D.trim() !== category.categoryName) {
+          errors.push( `category not found with name ${product.D}`);
+        }
+
+        if (product.E.trim() !== subCategory.subCategoryName) {
+          errors.push( `subcategory not found with name ${product.E}`);
+        }
+        
         dataToSaveInDb.push({
           productName: product.A,
           productImage: product.B,
           productPrice: product.C,
-          productDescription: product.D,
-          categoryById: categoryById,
-          subCategoryById: subCategoryById,
-          isActive: false,
+          productDescription: product.F,
+          categoryName: category.categoryName,
+          categoryById: category._id,
+          subCategoryName: subCategory.subCategoryName,
+          subCategoryById: subCategory._id,
+          isActive: true,
         });
+      }
+
+      if(errors.length >0 ){
+        return res
+            .status(401)
+            .send({
+              status: "Fail",
+              message: errors,
+            });
       }
       const savedProducts = await productModel.insertMany(dataToSaveInDb);
       deleteUploadedFile(req.file.path);
@@ -133,12 +156,14 @@ class productController {
   };
 
   static deleteProduct = async (req, res) => {
-    const { isActive, _id } = req.body;
-    if ((isActive == false || isActive == true) && _id) {
+    const { _id } = req.body;
+ 
+    // if ((isActive === false) && _id) {
       try {
+        
         await productModel.findByIdAndUpdate(
           _id,
-          { $set: { isActive: isActive } },
+          { $set: { isActive: false } },
           { new: true }
         );
         res
@@ -151,9 +176,9 @@ class productController {
           data: error.message,
         });
       }
-    } else {
-      res.status(400).send({ status: "Fail", message: "all felid required " });
-    }
+    // } else {
+    //   res.status(400).send({ status: "Fail", message: "all felid required " });
+    // }
   };
 
   static getProductListByCateId = async (req, res) => {

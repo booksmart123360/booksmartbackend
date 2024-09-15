@@ -6,7 +6,9 @@ const categoryRoute= express.Router();
 
 categoryRoute.get('/list/:id', checkUserAuth,categoryController.getCategoryById);
 categoryRoute.get('/list',checkUserAuth ,categoryController.getCategoryList);
-categoryRoute.post('/create',checkUserAuth,Upload.fields([{name:"categoryImage",maxCount:1},{name:"categoryBannerImage",maxCount:10}]),categoryController.createCategory);
-categoryRoute.put('/update',checkUserAuth,Upload.fields([{name:"categoryImage",maxCount:1},{name:"categoryBannerImage",maxCount:10}]),categoryController.updateCategory);
-categoryRoute.delete('/delete',checkUserAuth,categoryController.deleteCategory);
+// categoryRoute.post('/create',checkUserAuth,Upload.fields([{name:"categoryImage",maxCount:1},{name:"categoryBannerImage",maxCount:10}]),categoryController.createCategory);
+// categoryRoute.put('/update',checkUserAuth,Upload.fields([{name:"categoryImage",maxCount:1},{name:"categoryBannerImage",maxCount:10}]),categoryController.updateCategory);
+categoryRoute.post('/delete',checkUserAuth,categoryController.deleteCategory);
+categoryRoute.post('/create',checkUserAuth,categoryController.createCategory);
+categoryRoute.put('/update',checkUserAuth,categoryController.updateCategory);
 module.exports = categoryRoute; 

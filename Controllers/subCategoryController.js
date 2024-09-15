@@ -26,7 +26,8 @@ class subCategoryController {
       .findOne({ _id: _id })
       .select("-__v");
     if (UserData.isAdmin) {
-      const categoryList = await subcategoryModel.find().select("-__v");
+      const categoryList = await subcategoryModel.find({isActive:true}).select("-__v");
+
       res.status(200).send({ status: "Success", data: categoryList });
     } else {
       const categoryList = await subcategoryModel
@@ -38,11 +39,11 @@ class subCategoryController {
 
   static deleteSubCategory = async (req, res) => {
     const { isActive, _id } = req.body;
-    if ((isActive == false || isActive == true) && _id) {
+    // if ((isActive === false) && _id) {
       try {
         await subcategoryModel.findByIdAndUpdate(
           _id,
-          { $set: { isActive: isActive } },
+          { $set: { isActive: false } },
           { new: true }
         );
         res
@@ -55,8 +56,30 @@ class subCategoryController {
           data: error.message,
         });
       }
-    } else {
-      res.status(400).send({ status: "Fail", message: "all felid required " });
+    // } else {
+    //   res.status(400).send({ status: "Fail", message: "all felid required " });
+    // }
+  };
+
+  static updateSubcategory = async (req, res) => {
+    try {
+      var subcategoryId = req.body._id;
+      if (subcategoryId) {
+        var data = {
+          ...req.body,
+          isActive: true
+        };
+        const updatedSubCategory = await subcategoryModel
+          .findByIdAndUpdate(subcategoryId, { $set: data }, { new: true })
+          .select("-__v"); //saving in DB
+        res.status(200).send({
+          status: "Success",
+          message: "updated successfully",
+          data: updatedSubCategory,
+        });
+      }
+    } catch (err) {
+      res.status(400).json({ status: "Fail", message: "Something went wrong" });
     }
   };
 
@@ -69,14 +92,14 @@ class subCategoryController {
           .find({ $and: [{ isActive: true }, { categoryById: categoryId }] })
           // .find({ isActive: true })
           .select("-__v");
-        res.status(200).send({ status: "Success",data: categoryList });
+        res.status(200).send({ status: "Success", data: categoryList });
       } else {
         res
           .status(400)
           .send({ status: "Fail", data: [], message: " No Data Found" });
       }
     } catch (err) {
-      res.status(400).json({ status: "Fail", message:"Something went wrong" });
+      res.status(400).json({ status: "Fail", message: "Something went wrong" });
     }
   };
 }

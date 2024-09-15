@@ -9,6 +9,7 @@ subCategoryRoute.get('/list',checkUserAuth ,subCategoryController.getSubCategory
 subCategoryRoute.get('/listByCateID/:id',checkUserAuth ,subCategoryController.getSubCategoryListbyCateId);
 // subCategoryRoute.post('/create',checkUserAuth,Upload.fields([{name:"categoryImage",maxCount:1},{name:"categoryBannerImage",maxCount:10}]),categoryController.createCategory);
 // subCategoryRoute.put('/update',checkUserAuth,Upload.fields([{name:"categoryImage",maxCount:1},{name:"categoryBannerImage",maxCount:10}]),categoryController.updateCategory);
-subCategoryRoute.delete('/delete',checkUserAuth,subCategoryController.deleteSubCategory);
+subCategoryRoute.post('/delete',checkUserAuth,subCategoryController.deleteSubCategory);
+subCategoryRoute.put('/update',checkUserAuth,subCategoryController.updateSubcategory);
 
 module.exports=  subCategoryRoute; 
