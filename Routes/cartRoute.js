@@ -9,5 +9,4 @@ const cartRoute= express.Router();
 cartRoute.post('/create',checkUserAuth,cartController.createCart);
 cartRoute.get('/list', checkUserAuth,cartController.getCartList);
 
-
 module.exports = cartRoute; 

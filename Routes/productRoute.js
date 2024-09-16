@@ -6,8 +6,11 @@ const categoryRoute= express.Router();
 
 categoryRoute.get('/listByCate/:id', checkUserAuth,productController.getProductListByCateId);
 categoryRoute.get('/list',checkUserAuth ,productController.getProductList);
+categoryRoute.get('/one/:id', checkUserAuth, productController.getOneProduct);
 categoryRoute.post('/upload', checkUserAuth, Upload.single("productData") , productController.importProduct)
-categoryRoute.post('/create',checkUserAuth,Upload.fields([{name:"productImage",maxCount:1}]),productController.createProduct);
-categoryRoute.put('/update',checkUserAuth,Upload.fields([{name:"productImage",maxCount:1}]),productController.updateProduct);
+categoryRoute.post('/create',checkUserAuth, productController.createProduct );
+//categoryRoute.post('/create',checkUserAuth,Upload.fields([{name:"productImage",maxCount:1}]),productController.createProduct);
+categoryRoute.put('/update/:id',checkUserAuth, productController.updateProduct );
+//categoryRoute.put('/update',checkUserAuth,Upload.fields([{name:"productImage",maxCount:1}]),productController.updateProduct);
 categoryRoute.post('/delete',productController.deleteProduct);
 module.exports = categoryRoute; 
