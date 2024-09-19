@@ -10,21 +10,21 @@ dotenv.config();
 
 class productController {
   static getProductList = async (req, res) => {
-    const { _id } = req.user;
-    const UserData = await userRegistration
-      .findOne({ _id: _id })
-      .select("-__v");
-    if (UserData.isAdmin) {
+    // const { _id } = req.user;
+    // const UserData = await userRegistration
+    //   .findOne({ _id: _id })
+    //   .select("-__v");
+    // if (UserData.isAdmin) {
       const productList = await productModel
         .find({ isActive: true })
         .select("-__v");
       res.status(200).send({ status: "Success", data: productList });
-    } else {
-      const productList = await productModel
-        .find({ isActive: true })
-        .select("-__v");
-      res.status(200).send({ status: "Success", data: productList });
-    }
+    // } else {
+    //   const productList = await productModel
+    //     .find({ isActive: true })
+    //     .select("-__v");
+    //   res.status(200).send({ status: "Success", data: productList });
+    // }
   };
 
   static importProduct = async (req, res) => {
@@ -249,7 +249,7 @@ class productController {
 
   static getProductListByCateId = async (req, res) => {
     var id = req.params.id;
-    if (id) {
+    // if (id) {
       const productData = await productModel
         .find({ categoryById: id })
         .select("-__v");
@@ -260,11 +260,11 @@ class productController {
           .status(200)
           .send({ status: "Fail", message: "Data is not available" });
       }
-    } else {
-      res
-        .status(400)
-        .send({ status: "Fail", message: "Please sent Proper Product Id" });
-    }
+    // } else {
+    //   res
+    //     .status(400)
+    //     .send({ status: "Fail", message: "Please sent Proper Product Id" });
+    // }
   };
 
   static getOneProduct = async (req, res) => {

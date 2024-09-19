@@ -20,19 +20,19 @@ class categoryController {
   };
 
   static getCategoryList = async (req, res) => {
-    const { _id } = req.user;
-    const UserData = await userRegistration
-      .findOne({ _id: _id })
-      .select("-__v");
-    if (UserData.isAdmin) {
+    // const { _id } = req.user;
+    // const UserData = await userRegistration
+    //   .findOne({ _id: _id })
+    //   .select("-__v");
+    // if (UserData.isAdmin) {
       const categoryList = await categoryModel.find({isActive: true}).select("-__v");
       res.status(200).send({ status: "Success", data: categoryList });
-    } else {
-      const categoryList = await categoryModel
-        .find({ isActive: true })
-        .select("-__v");
-      res.status(200).send({ status: "Success", data: categoryList });
-    }
+    // } else {
+    //   const categoryList = await categoryModel
+    //     .find({ isActive: true })
+    //     .select("-__v");
+    //   res.status(200).send({ status: "Success", data: categoryList });
+    // }
   };
 
   static createCategory = async (req, res) => {

@@ -1,5 +1,7 @@
 const { subcategoryModel } = require("../Models/subCategoryModel.js");
 const { userRegistration } = require("../Models/userModel.js");
+const mongoose = require('mongoose');
+const ObjectId = mongoose.Types.ObjectId;
 
 class subCategoryController {
   static createSubCategory = async (req, res) => {
@@ -21,20 +23,20 @@ class subCategoryController {
     }
   };
   static getSubCategoryList = async (req, res) => {
-    const { _id } = req.user;
-    const UserData = await userRegistration
-      .findOne({ _id: _id })
-      .select("-__v");
-    if (UserData.isAdmin) {
+    // const { _id } = req.user;
+    // const UserData = await userRegistration
+    //   .findOne({ _id: _id })
+    //   .select("-__v");
+    // if (UserData.isAdmin) {
       const categoryList = await subcategoryModel.find({isActive:true}).select("-__v");
 
       res.status(200).send({ status: "Success", data: categoryList });
-    } else {
-      const categoryList = await subcategoryModel
-        .find({ isActive: true })
-        .select("-__v");
-      res.status(200).send({ status: "Success", data: categoryList });
-    }
+    // } else {
+    //   const categoryList = await subcategoryModel
+    //     .find({ isActive: true })
+    //     .select("-__v");
+    //   res.status(200).send({ status: "Success", data: categoryList });
+    // }
   };
 
   static deleteSubCategory = async (req, res) => {
@@ -85,21 +87,52 @@ class subCategoryController {
 
   static getSubCategoryListbyCateId = async (req, res) => {
     try {
-      const { _id } = req.user;
-      var categoryId = req.params.id;
+      //const { _id } = req.user; // Assuming you're using req.user from authentication middleware
+      const categoryId = req.params.id; // Get the categoryId from the URL params
+    
       if (categoryId) {
+        // Check if categoryId is a valid ObjectId
+        if (!ObjectId.isValid(categoryId)) {
+          return res.status(400).send({
+            status: "Fail",
+            message: "Invalid categoryId",
+          });
+        }
+    
         const categoryList = await subcategoryModel
-          .find({ $and: [{ isActive: true }, { categoryById: categoryId }] })
-          // .find({ isActive: true })
+          .find({
+            $and: [
+              { isActive: true },
+              { categoryById: new ObjectId(categoryId) }, // Convert categoryId to ObjectId
+            ],
+          })
           .select("-__v");
-        res.status(200).send({ status: "Success", data: categoryList });
+    
+        if (categoryList.length > 0) {
+          res.status(200).send({
+            status: "Success",
+            data: categoryList,
+          });
+        } else {
+          res.status(404).send({
+            status: "Fail",
+            data: [],
+            message: "No subcategories found",
+          });
+        }
       } else {
-        res
-          .status(400)
-          .send({ status: "Fail", data: [], message: " No Data Found" });
+        res.status(400).send({
+          status: "Fail",
+          data: [],
+          message: "No categoryId provided",
+        });
       }
     } catch (err) {
-      res.status(400).json({ status: "Fail", message: "Something went wrong" });
+      console.error(err);
+      res.status(500).json({
+        status: "Fail",
+        message: "Something went wrong",
+      });
     }
   };
 }

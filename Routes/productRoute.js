@@ -4,9 +4,9 @@ const checkUserAuth = require( "../Middleware/authMiddleware.js");
 const {Upload} = require( "../Confige/FileUpload.js");
 const categoryRoute= express.Router();
 
-categoryRoute.get('/listByCate/:id', checkUserAuth,productController.getProductListByCateId);
-categoryRoute.get('/list',checkUserAuth ,productController.getProductList);
-categoryRoute.get('/one/:id', checkUserAuth, productController.getOneProduct);
+categoryRoute.get('/listByCate/:id',productController.getProductListByCateId);
+categoryRoute.get('/list' ,productController.getProductList);
+categoryRoute.get('/one/:id', productController.getOneProduct);
 categoryRoute.post('/upload', checkUserAuth, Upload.single("productData") , productController.importProduct)
 categoryRoute.post('/create',checkUserAuth, productController.createProduct );
 //categoryRoute.post('/create',checkUserAuth,Upload.fields([{name:"productImage",maxCount:1}]),productController.createProduct);
