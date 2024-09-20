@@ -71,6 +71,7 @@ class userController {
         } else {
           const hashPassword = await bcrypt.hash(userdata.password, 10);
           userdata.password = hashPassword;
+          userdata.isVerified = true;
           const newUser = new userRegistration(userdata);
           await newUser.save();
           afterProcessUser = newUser;

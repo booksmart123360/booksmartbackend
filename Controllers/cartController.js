@@ -27,6 +27,7 @@ class cartController {
 
       cart.Subtotal = 0;
       cart.Amount = 0;
+      cart.Discountamount = 0;
 
       for (let i = 0; i < cart.Products.length; i++) {
         const product = cart.Products[i];
