@@ -35,7 +35,7 @@ const CartSchema = new mongoose.Schema(
     },
     CustomerLastName: {
       type: String,
-      required: true,
+      // required: true,
     },
     CustomerMobileNumber: {
       type: Number,
@@ -43,7 +43,7 @@ const CartSchema = new mongoose.Schema(
     },
     DeliveryAddress: {
       type: AddressSchema,
-      required: true,
+      // required: true,
     },
     Products: [
       {
