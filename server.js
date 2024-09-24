@@ -3,6 +3,7 @@ const userRoute = require("./Routes/userRoute.js");
 const categoryRoute = require("./Routes/categoryRoute.js");
 const subCategoryRoute = require("./Routes/subCategoryRoute.js");
 const productRoute = require("./Routes/productRoute.js");
+const sliderRoute = require("./Routes/sliderRouter.js");
 const cartRoute = require("./Routes/cartRoute.js");
 const cors = require("cors");
 const path = require("path");
@@ -22,6 +23,7 @@ app.use("/api/category", categoryRoute);
 app.use("/api/subcategory", subCategoryRoute);
 app.use("/api/product", productRoute);
 app.use("/api/cart", cartRoute);
+app.use("/api/slider", sliderRoute);
 
 // Serve static files
 app.use('/image', express.static('Upload'));
