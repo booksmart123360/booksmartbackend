@@ -14,6 +14,7 @@ const sliderSchema = new mongoose.Schema({
     required: true,
   },
   images: [String],
+  isActive: Boolean,
 });
 
 module.exports = mongoose.model("slider", sliderSchema);
